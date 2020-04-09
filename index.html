@@ -1,0 +1,55 @@
+<!doctype HTML>
+<html>
+  <head>
+    <script src="https://aframe.io/releases/1.0.3/aframe.min.js"></script>
+    <script type="text/javascript" src="https://cdn.rawgit.com/jeromeetienne/AR.js/1.6.2/aframe/build/aframe-ar.js"></script>
+    <script src="https://raw.githack.com/donmccurdy/aframe-extras/master/dist/aframe-extras.loaders.min.js"></script>
+  </head>
+
+  <body style='margin : 0px; overflow: hidden;'>
+    
+    <a-scene embedded vr-mode-ui="enabled: false" arjs="sourceType: webcam; debugUIEnabled: false; detectionMode: mono_and_matrix; matrixCodeType: 3x3;">
+      <a-assets>
+        <video id="penguin-sledding" autoplay loop="true" muted="true" src="video/perfo3.mp4" border-radius="50px"></video>
+        <audio id="river" src="./video/videocv_audio.mp3" preload="auto"></audio>
+      </a-assets>
+      <a-marker preset="hiro">
+        <a-video src="#penguin-sledding" position="0.51 0.01 0" rotation="270 0 0" play="true" width="2.18" height="1.21"></a-video>
+        <a-entity sound="src: #river"></a-entity>
+      </a-marker>
+      <a-entity camera></a-entity>
+    </a-scene>
+    
+    <script>
+
+      var playing = false;
+      var audioPlaying = false;
+
+      window.addEventListener('click', function () {
+      var v = document.querySelector('#penguin-sledding');
+      var audio = document.querySelector('#river');
+      if(playing == false){
+        v.play();
+        audio.play();
+        playing = true;
+        audioPlaying = true;
+      }else{
+        v.pause();
+        audio.pause();
+        playing = false;
+        audioPlaying = false;
+      }
+      
+      });
+    </script>
+
+    <style>
+
+      #penguin-sledding{
+        border-radius: 50%;
+      }
+
+    </style>
+
+  </body>
+</html>
